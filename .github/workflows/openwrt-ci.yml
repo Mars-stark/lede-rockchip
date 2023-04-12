@@ -65,20 +65,17 @@ jobs:
           rm -rf package/kernel/mac80211 && rm -rf package/kernel/rtl8821cu && rm -rf package/kernel/mt76
           svn export https://github.com/openwrt/openwrt/trunk/package/kernel/mac80211 package/kernel/mac80211
           svn export https://github.com/openwrt/openwrt/trunk/package/kernel/mt76 package/kernel/mt76
+          echo >> feeds.conf.default
+          echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a -f
           echo '
           CONFIG_TARGET_rockchip=y
           CONFIG_TARGET_rockchip_armv8=y
           CONFIG_TARGET_MULTI_PROFILE=y
-          CONFIG_TARGET_DEVICE_rockchip_armv8_DEVICE_embedfire_doornet1=y
-          CONFIG_TARGET_DEVICE_rockchip_armv8_DEVICE_embedfire_doornet2=y
-          CONFIG_TARGET_DEVICE_rockchip_armv8_DEVICE_friendlyarm_nanopi-r2c=y
-          CONFIG_TARGET_DEVICE_rockchip_armv8_DEVICE_friendlyarm_nanopi-r2s=y
           CONFIG_TARGET_DEVICE_rockchip_armv8_DEVICE_friendlyarm_nanopi-r4s=y
-          CONFIG_TARGET_DEVICE_rockchip_armv8_DEVICE_friendlyarm_nanopi-r4se=y
-          CONFIG_TARGET_KERNEL_PARTSIZE=64
-          CONFIG_TARGET_ROOTFS_PARTSIZE=512
+          CONFIG_TARGET_KERNEL_PARTSIZE=512
+          CONFIG_TARGET_ROOTFS_PARTSIZE=2048
           CONFIG_TARGET_ROOTFS_TARGZ=y
           CONFIG_TARGET_ROOTFS_EXT4FS=y
           CONFIG_TARGET_ROOTFS_SQUASHFS=y
